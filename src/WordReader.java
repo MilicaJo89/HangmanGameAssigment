@@ -1,3 +1,1 @@
-public class WordReader {
-
-}
+public class WordReader {}

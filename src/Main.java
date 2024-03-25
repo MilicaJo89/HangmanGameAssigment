@@ -13,7 +13,7 @@ public class Main {
         System.out.println("Give me a word,any word: ");
 
         word = scanner.nextLine();
-        Hangman hangman = new Hangman(word, 6);
+        Hangman hangman = new Hangman(word, 16);
         hangman.GamePlay();
     }
 }
