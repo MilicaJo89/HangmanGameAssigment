@@ -1,19 +1,16 @@
-import java.util.Scanner;
-
+import java.util.List;
+import java.util.Random;
 
 public class Main {
-    static String word;
-
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-
+        List<String>words=WordReader.WordReader("src/Resource/GameWords.csv");
+        Random random = new Random();
+        String gameWord=words.get(random.nextInt(words.size()));
         System.out.println("Welcome to the hangman game!Let's play!");
         System.out.println("Give me a word,any word: ");
-
-        word = scanner.nextLine();
-        Hangman hangman = new Hangman(word, 16);
+        Hangman hangman = new Hangman(gameWord, 16);
         hangman.GamePlay();
     }
 }

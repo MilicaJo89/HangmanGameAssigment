@@ -11,14 +11,11 @@ public class Hangman {
     char[] mysteryWord;
 
 
-
-
-
-
     public Hangman(String word, int lives) {
         this.word = word;
         this.lives = lives;
     }
+
 
     public void SetUp(){
         mysteryWord=new char[word.length()];
@@ -30,7 +27,9 @@ public class Hangman {
         System.out.println("It has " + word.length()+" letters");
     }
 
+
     public void GuessLetter(){
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Word: "+ String.valueOf(mysteryWord));
         System.out.println("Tries left: "+lives+"\n");
@@ -44,37 +43,39 @@ public class Hangman {
                 mysteryWord[j]=guess;
                 correct = true;
                 numberOfGuessedLetters++;}
-            j++;
-        }
+                j++;
+            }
         if (numberOfGuessedLetters > 0) {
-                System.out.println("There is " + guess + " in the word");
-                System.out.println("It can be found " + numberOfGuessedLetters + " times in the word");
-        }
+            System.out.println("There is " + guess + " in the word");
+            System.out.println("It can be found " + numberOfGuessedLetters + " times in the word");
+            }
         if (!correct) {
-                System.out.println("Wrong letter");
-                lives--;
+            System.out.println("Wrong letter");
+            lives--;
         }
     }
 
+
     public void GuessWord(){
+
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Word: "+String.valueOf(mysteryWord));
+        System.out.println("Word: "+String.valueOf(mysteryWord)+"\n");
         System.out.print("Try guessing the whole word: ");
-        entireGuess=scanner.next();
-        if (entireGuess.equals(word)){
+        entireGuess=scanner.nextLine();
+        if (entireGuess.equals(word)) {
             System.out.println("You have guessed the word!!");
-            System.out.println("The word is "+word);
-            System.out.println("Tries left: "+lives);
-
-        }else {
+            System.out.println("The word is " + word);
+        }
+        else if (entireGuess.length()!=word.length()) {
+            System.out.println("The number of letters in the word is not correct!");
+        } else {
             lives--;
             System.out.println("Wrong word!!");
         }
     }
 
-    public void GamePlay(){
 
+    public void GamePlay(){
 
         SetUp();
         while (lives > 0){
