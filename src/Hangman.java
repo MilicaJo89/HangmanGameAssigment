@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Hangman {
@@ -33,8 +34,17 @@ public class Hangman {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Word: "+ String.valueOf(mysteryWord));
         System.out.println("Tries left: "+lives+"\n");
-        System.out.print("Guess a letter: ");
-        guess=scanner.next().charAt(0);
+        while (true){
+            System.out.print("Guess a letter: ");
+            guess=scanner.next().charAt(0);
+            try {
+                if (!Character.isLetter(guess)){
+                    throw new InputMismatchException();
+                }break;
+            }catch (InputMismatchException e){
+                System.out.println("Numbers and special characters are not allowed!");
+            }
+        }
         int j=0;
         correct=false;
         numberOfGuessedLetters=0;
@@ -52,15 +62,17 @@ public class Hangman {
         if (!correct) {
             System.out.println("Wrong letter");
             lives--;
+            System.out.println("Tries left: "+lives);
         }
     }
 
 
+    /*
     public void GuessWord(){
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Word: "+String.valueOf(mysteryWord)+"\n");
-        System.out.print("Try guessing the whole word: ");
+        System.out.print("Do you want to try guessing the entire word: ");
         entireGuess=scanner.nextLine();
         if (entireGuess.equals(word)) {
             System.out.println("You have guessed the word!!");
@@ -71,6 +83,36 @@ public class Hangman {
         } else {
             lives--;
             System.out.println("Wrong word!!");
+        }
+    }*/
+
+    public void GuessWord(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Word: "+String.valueOf(mysteryWord)+"\n");
+
+        while (true){
+            System.out.println("Do you want to try guessing the entire word?");
+            System.out.println("Enter no or guess the word: ");
+            entireGuess= scanner.nextLine();
+            if (entireGuess.length()==word.length()){
+                if (entireGuess.equals(word)){
+                    System.out.println("You have guessed the word!");
+                    System.out.println("The word is: "+word);
+                    break;
+                }else {
+                    lives--;
+                    System.out.println("Wrong word!!");
+                    System.out.println("Tries left: "+lives);
+                    break;
+                }
+            }
+            if (entireGuess.matches("no")){
+                break;
+            }
+            if (entireGuess.length()!=word.length()){
+                System.out.println("The number of letters in the word do not match!");
+                break;
+            }break;
         }
     }
 
