@@ -67,24 +67,6 @@ public class Hangman {
     }
 
 
-    /*
-    public void GuessWord(){
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Word: "+String.valueOf(mysteryWord)+"\n");
-        System.out.print("Do you want to try guessing the entire word: ");
-        entireGuess=scanner.nextLine();
-        if (entireGuess.equals(word)) {
-            System.out.println("You have guessed the word!!");
-            System.out.println("The word is " + word);
-        }
-        else if (entireGuess.length()!=word.length()) {
-            System.out.println("The number of letters in the word is not correct!");
-        } else {
-            lives--;
-            System.out.println("Wrong word!!");
-        }
-    }*/
 
     public void GuessWord(){
         Scanner scanner = new Scanner(System.in);
@@ -94,25 +76,22 @@ public class Hangman {
             System.out.println("Do you want to try guessing the entire word?");
             System.out.println("Enter no or guess the word: ");
             entireGuess= scanner.nextLine();
-            if (entireGuess.length()==word.length()){
-                if (entireGuess.equals(word)){
-                    System.out.println("You have guessed the word!");
-                    System.out.println("The word is: "+word);
-                    break;
-                }else {
-                    lives--;
-                    System.out.println("Wrong word!!");
-                    System.out.println("Tries left: "+lives);
-                    break;
-                }
-            }
-            if (entireGuess.matches("no")){
+            if (entireGuess.equals(word)){
+                System.out.println("You have guessed the word!");
+                System.out.println("The word is: "+word);
+                break;
+            }if (entireGuess.matches("no")){
                 break;
             }
             if (entireGuess.length()!=word.length()){
                 System.out.println("The number of letters in the word do not match!");
                 break;
-            }break;
+            }else {
+                lives--;
+                System.out.println("Wrong word!!");
+                System.out.println("Tries left: "+lives);
+                break;
+            }
         }
     }
 
